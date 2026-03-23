@@ -1,4 +1,3 @@
-
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
@@ -621,6 +620,126 @@
 
 
 
+        /* 漢堡菜單 */
+        .hamburger-menu {
+            display: flex;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            gap: 6px;
+        }
+
+        .hamburger-menu span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--accent-gold);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* 側邊菜單 */
+        .sidebar-menu {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(245, 243, 240, 0.98), rgba(251, 249, 247, 0.98));
+            backdrop-filter: blur(10px);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 999;
+            padding-top: 60px;
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+            border-right: 2px solid var(--accent-gold);
+        }
+
+        .sidebar-menu.active {
+            transform: translateX(0);
+        }
+
+        .sidebar-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            padding: 0;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 16px 24px;
+            color: var(--text-dark);
+            text-decoration: none;
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .sidebar-menu a:hover {
+            background-color: rgba(212, 175, 142, 0.1);
+            border-left-color: var(--accent-gold);
+            padding-left: 28px;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-dark);
+            transition: transform 0.2s ease;
+        }
+
+        .close-menu:hover {
+            transform: scale(1.2);
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 998;
+        }
+
+        .sidebar-overlay.active {
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* 響應式漢堡菜單 */
+        @media (max-width: 768px) {
+            .device-switcher {
+                display: none;
+            }
+        }
+
         /* 頁尾 */
         footer {
             background: transparent;
@@ -694,6 +813,11 @@
                 <div class="logo-icon">🏮</div>
                 <span>佛教小說集</span>
             </div>
+            <button class="hamburger-menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <div class="device-switcher">
                 <button class="device-btn active" onclick="switchDevice('desktop')">💻 電腦</button>
                 <button class="device-btn" onclick="switchDevice('tablet')">📱 平板</button>
@@ -701,6 +825,21 @@
             </div>
         </div>
     </header>
+
+    <!-- 側邊菜單 -->
+    <nav class="sidebar-menu" id="sidebarMenu">
+        <button class="close-menu" onclick="toggleMenu()">✕</button>
+        <ul>
+            <li><a href="#section-classification" onclick="toggleMenu()">分類方法</a></li>
+            <li><a href="#section-works" onclick="toggleMenu()">作品清單</a></li>
+            <li><a href="#section-wu" onclick="toggleMenu()">吳賢愷分類</a></li>
+            <li><a href="#section-stats" onclick="toggleMenu()">統計分析</a></li>
+            <li><a href="#section-anticommunist" onclick="toggleMenu()">反共文學</a></li>
+            <li><a href="#section-research" onclick="toggleMenu()">核心研究主題</a></li>
+            <li><a href="#section-references" onclick="toggleMenu()">參考文獻</a></li>
+        </ul>
+    </nav>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMenu()"></div>
 
     <!-- 主要內容 -->
     <main class="container">
@@ -713,40 +852,8 @@
             <div class="hero-decorative right">🌸</div>
         </section>
 
-        <!-- 下拉選單過濾區域 -->
-        <section class="filter-section">
-            <h2>🔍 篩選與查詢</h2>
-            <div class="filter-row">
-                <div class="filter-group">
-                    <label for="filter-author">作者身分</label>
-                    <select id="filter-author" onchange="filterData()">
-                        <option value="">全部</option>
-                        <option value="僧">僧尼</option>
-                        <option value="軍">軍職作家</option>
-                        <option value="普通">普通作家</option>
-                        <option value="虔誠">虔誠信徒</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="filter-type">佛教性質</label>
-                    <select id="filter-type" onchange="filterData()">
-                        <option value="">全部</option>
-                        <option value="填充">佛、僧人、寺廟作為背景或敘述填充</option>
-                        <option value="推進">佛、僧人、寺廟對小說情節有推進作用</option>
-                        <option value="哲理">佛教哲理和戒律</option>
-                        <option value="未知">關係不明</option>
-                        <option value="果報">果報思想</option>
-                        <option value="改編">佛教故事改編</option>
-                    </select>
-                </div>
-            </div>
-        </section>
-
-        <!-- 裝飾分隔線 -->
-        <div class="decorative-divider">🌸 ❖ 🌸</div>
-
         <!-- 分類方法標題 -->
-        <section style="margin-bottom: 60px; padding: 50px 40px; background: linear-gradient(135deg, rgba(212, 175, 142, 0.12), rgba(168, 197, 192, 0.12)); border-radius: 20px; border: 2px solid var(--border-color); position: relative; overflow: hidden;">
+        <section id="section-classification" style="margin-bottom: 60px; padding: 50px 40px; background: linear-gradient(135deg, rgba(212, 175, 142, 0.12), rgba(168, 197, 192, 0.12)); border-radius: 20px; border: 2px solid var(--border-color); position: relative; overflow: hidden;">
             <div style="position: absolute; top: 20px; right: 30px; font-size: 60px; opacity: 0.15; animation: rotate 30s linear infinite;">☸</div>
             <div style="position: absolute; bottom: 20px; left: 30px; font-size: 60px; opacity: 0.15; animation: rotate 30s linear infinite reverse;">♀</div>
             <div style="position: absolute; top: 50%; right: 10%; font-size: 50px; opacity: 0.1; animation: float 4s ease-in-out infinite;">♕</div>
@@ -756,23 +863,22 @@
 
         <!-- 故事性質分類 - 四個粗體字標題 -->
 
-        <!-- 范純武 -->
-        <section class="major-section">
-            <h2>范純武</h2>
-            <div class="major-section-content">
-                <ul>
+        <!-- 四個分類並列 -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 40px;">
+            <!-- 范純武 -->
+            <div style="padding: 25px; background: linear-gradient(135deg, rgba(212, 175, 142, 0.1), rgba(212, 175, 142, 0.05)); border-left: 4px solid var(--accent-gold); border-radius: 8px;">
+                <h3 style="font-size: 20px; font-weight: 700; color: var(--accent-gold); margin-top: 0; margin-bottom: 15px;">范純武</h3>
+                <ul style="font-size: 15px; line-height: 2; color: var(--text-light); margin: 0; padding-left: 20px;">
                     <li>新創作題材的小說</li>
                     <li>雜揉個人經驗的小說</li>
                     <li>改編佛教故事的小說</li>
                 </ul>
             </div>
-        </section>
 
-        <!-- 李玉珍 -->
-        <section class="major-section">
-            <h2>李玉珍</h2>
-            <div class="major-section-content">
-                <ul>
+            <!-- 李玉珍 -->
+            <div style="padding: 25px; background: linear-gradient(135deg, rgba(168, 197, 192, 0.1), rgba(168, 197, 192, 0.05)); border-left: 4px solid var(--accent-teal); border-radius: 8px;">
+                <h3 style="font-size: 20px; font-weight: 700; color: var(--accent-teal); margin-top: 0; margin-bottom: 15px;">李玉珍</h3>
+                <ul style="font-size: 15px; line-height: 2; color: var(--text-light); margin: 0; padding-left: 20px;">
                     <li>改寫的佛經故事</li>
                     <li>鄉野傳奇式的勸善小說</li>
                     <li>以家庭情愛印證佛法的小說</li>
@@ -781,13 +887,11 @@
                     <li>無法歸類</li>
                 </ul>
             </div>
-        </section>
 
-        <!-- 丁敏 -->
-        <section class="major-section">
-            <h2>丁敏</h2>
-            <div class="major-section-content">
-                <ul>
+            <!-- 丁敏 -->
+            <div style="padding: 25px; background: linear-gradient(135deg, rgba(200, 184, 216, 0.1), rgba(200, 184, 216, 0.05)); border-left: 4px solid var(--accent-purple); border-radius: 8px;">
+                <h3 style="font-size: 20px; font-weight: 700; color: var(--accent-purple); margin-top: 0; margin-bottom: 15px;">丁敏</h3>
+                <ul style="font-size: 15px; line-height: 2; color: var(--text-light); margin: 0; padding-left: 20px;">
                     <li>借用佛教題材</li>
                     <li>賦予佛教神佛中國性格</li>
                     <li>以佛教故事和典故為敘述結構</li>
@@ -796,13 +900,11 @@
                     <li>因果報應</li>
                 </ul>
             </div>
-        </section>
 
-        <!-- 吳賢愷 -->
-        <section class="major-section">
-            <h2>吳賢愷</h2>
-            <div class="major-section-content">
-                <ul>
+            <!-- 吳賢愷 -->
+            <div style="padding: 25px; background: linear-gradient(135deg, rgba(212, 175, 142, 0.08), rgba(168, 197, 192, 0.08)); border-left: 4px solid var(--accent-gold); border-radius: 8px;">
+                <h3 style="font-size: 20px; font-weight: 700; color: var(--text-dark); margin-top: 0; margin-bottom: 15px;">吳賢愷</h3>
+                <ul style="font-size: 15px; line-height: 2; color: var(--text-light); margin: 0; padding-left: 20px;">
                     <li>佛教故事改編</li>
                     <li>佛教哲理和戒律</li>
                     <li>果報思想</li>
@@ -811,13 +913,40 @@
                     <li>關係不明</li>
                 </ul>
             </div>
-        </section>
+        </div>
 
         <!-- 裝飾分隔線 -->
         <div class="decorative-divider">🌸 ❖ 🌸</div>
 
-        <!-- 完整作品清單表格 -->
-        <section class="table-section">
+        <!-- 篩選與查詢 + 作品清單合併 -->
+        <section id="section-works" class="table-section">
+            <div class="filter-section" id="section-filter" style="margin-bottom: 30px;">
+                <h2>🔍 篩選與查詢</h2>
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label for="filter-author">作者身分</label>
+                        <select id="filter-author" onchange="filterData()">
+                            <option value="">全部</option>
+                            <option value="僧">僧尼</option>
+                            <option value="軍">軍職作家</option>
+                            <option value="普通">普通作家</option>
+                            <option value="虔誠">虔誠信徒</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-type">佛教性質</label>
+                        <select id="filter-type" onchange="filterData()">
+                            <option value="">全部</option>
+                            <option value="填充">佛、僧人、寺廟作為背景或敘述填充</option>
+                            <option value="推進">佛、僧人、寺廟對小說情節有推進作用</option>
+                            <option value="哲理">佛教哲理和戒律</option>
+                            <option value="未知">關係不明</option>
+                            <option value="果報">果報思想</option>
+                            <option value="改編">佛教故事改編</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
             <h2>📑 作品清單</h2>
             <div class="table-wrapper">
                 <table id="worksTable">
@@ -838,7 +967,7 @@
         </section>
 
         <!-- 統計數據 -->
-        <section class="stats-section">
+        <section id="section-stats" class="stats-section">
             <h2>📊 統計數據</h2>
             <div class="stats-content">
                 <div class="stat-item">
@@ -922,94 +1051,122 @@
         </section>
 
         <!-- 反共懷鄉 VS 反共愛國 -->
-        <section class="classification-section">
-            <h2>📖 反共懷鄉 VS 反共愛國</h2>
-            <div class="classification-grid">
-                <div class="classification-card">
-                    <h3>李玉珍十一篇</h3>
-                    <ul>
-                        <li>〈紅葉〉</li>
-                        <li>〈雨〉</li>
-                        <li>〈人間的奇蹟〉</li>
-                        <li>〈紅塵〉</li>
-                        <li>〈三角〉</li>
-                        <li>〈喜帖〉</li>
-                        <li>〈朝來寒雨晚來風〉</li>
-                        <li>〈荒寺的一夜〉</li>
-                        <li>〈普陀緣〉</li>
-                        <li>〈重生〉</li>
-                        <li>〈佈施〉</li>
-                    </ul>
+        <section class="major-section" id="section-anticommunist" style="margin-bottom: 80px; padding: 40px; background: linear-gradient(135deg, rgba(212, 175, 142, 0.04), rgba(168, 197, 192, 0.04));">
+            <h2 style="font-size: 40px; font-weight: 700; color: var(--text-dark); margin-bottom: 30px; padding-bottom: 20px; border-bottom: 4px solid var(--accent-gold); letter-spacing: 2px; position: relative; display: flex; align-items: center; gap: 15px;">
+                <span style="font-size: 32px; opacity: 0.7; animation: float 3s ease-in-out infinite;">☸</span>
+                反共懷鄉 VS 反共愛國
+                <span style="font-size: 32px; opacity: 0.7; animation: float 3s ease-in-out infinite reverse;">☸</span>
+            </h2>
+            <div class="major-section-content" style="font-size: 17px; line-height: 2.2;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px;">
+                    <div style="padding: 30px; background: linear-gradient(135deg, rgba(212, 175, 142, 0.15), rgba(212, 175, 142, 0.05)); border-left: 6px solid var(--accent-gold); border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <h3 style="font-size: 22px; font-weight: 700; color: var(--accent-gold); margin-top: 0; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 20px;">✦</span>
+                            李玉珍十一篇
+                        </h3>
+                        <p style="font-size: 16px; line-height: 2.4; color: var(--text-light); margin: 0;">
+                            〈紅葉〉、〈雨〉、〈人間的奇蹟〉、〈紅塵〉、〈三角〉、〈喜帖〉、〈朝來寒雨晚來風〉、〈荒寺的一夜〉、〈普陀緣〉、〈重生〉、〈佈施〉
+                        </p>
+                    </div>
+                    <div style="padding: 30px; background: linear-gradient(135deg, rgba(168, 197, 192, 0.15), rgba(168, 197, 192, 0.05)); border-left: 6px solid var(--accent-teal); border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <h3 style="font-size: 22px; font-weight: 700; color: var(--accent-teal); margin-top: 0; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 20px;">◆</span>
+                            吳賢愷五篇
+                        </h3>
+                        <p style="font-size: 16px; line-height: 2.4; color: var(--text-light); margin: 0;">
+                            〈普陀緣〉、〈紅塵〉、〈重生〉、〈三角〉、〈朝來寒雨晚來風〉
+                        </p>
+                    </div>
                 </div>
-
-                <div class="classification-card">
-                    <h3>吳賢愷四篇</h3>
-                    <ul>
-                        <li>〈普陀緣〉</li>
-                        <li>〈紅塵〉</li>
-                        <li>〈重生〉</li>
-                        <li>〈三角〉</li>
-                        <li>〈朝來寒雨晚來風〉</li>
-                    </ul>
+                <div style="padding: 25px; background: rgba(200, 184, 216, 0.1); border-left: 4px solid var(--accent-purple); border-radius: 6px; margin-top: 30px;">
+                    <p style="font-size: 16px; line-height: 2.2; color: var(--text-light); margin: 0; font-style: italic;">
+                        反共文學與懷鄉文學是否可以等同？反共文學是否可以稱為一種類型
+                    </p>
                 </div>
             </div>
         </section>
 
         <!-- 核心研究主題 -->
-        <section style="margin-bottom: 60px;">
-            <h2 style="font-size: 28px; margin-bottom: 40px; color: var(--text-dark); text-align: center; position: relative; padding-bottom: 20px; font-weight: 700;">📖 核心研究主題
-                <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: linear-gradient(90deg, var(--accent-purple), var(--accent-teal)); border-radius: 2px; box-shadow: 0 2px 8px rgba(168, 197, 192, 0.3);"></span>
-            </h2>
-            <div style="display: flex; flex-direction: column; gap: 25px; margin-top: 40px;">
-                <section class="major-section" style="margin-bottom: 0; min-height: auto; padding: 40px;">
-                    <h2 style="font-size: 22px; margin-bottom: 15px; padding-bottom: 12px; border-bottom: 3px solid var(--accent-gold); display: flex; align-items: center; gap: 12px;">
-                        <span style="font-size: 28px; animation: spin-slow 8s linear infinite;">☸</span>
-                        反共文學和戰鬥文藝的衰退
-                    </h2>
-                    <div class="major-section-content" style="padding: 0;">
-                        <p style="font-size: 17px; color: var(--text-light); line-height: 2.2; margin: 0;">
-                            反共文學和戰鬥文藝的衰退——1956 年《文藝創作》停刊和文獎會解散<br>
-                            1955 年戰鬥文藝口號的提出標示著反共文學的挫敗<br>
-                            陳明成：美國壓制和張道藩的失勢<br>
-                            封德屏：張道藩專心投入公務
-                        </p>
-                    </div>
-                </section>
+        <section id="section-research" style="margin-bottom: 80px;">
+            <h2 style="font-size: 40px; font-weight: 700; color: var(--text-dark); margin-bottom: 40px; padding-bottom: 20px; border-bottom: 4px solid var(--accent-gold); text-align: center; letter-spacing: 2px;">📖 核心研究主題</h2>
+            <div style="display: flex; flex-direction: column; gap: 25px;">
+                <!-- 第一格: 反共文學和戰鬥文藝的衰退 -->
+                <div style="padding: 30px; background: linear-gradient(135deg, rgba(212, 175, 142, 0.08), rgba(168, 197, 192, 0.08)); border-left: 6px solid var(--accent-gold); border-radius: 8px;">
+                    <h3 style="font-size: 24px; font-weight: 700; color: var(--text-dark); margin-top: 0; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 20px; animation: float 3s ease-in-out infinite;">☸</span>
+                        反共文學和戰鬥文藝的衰退——1956年《文藝創作》停刊和文獎會解散
+                    </h3>
+                    <p style="font-size: 17px; line-height: 2.2; color: var(--text-light); margin: 0;">
+                        1955年戰鬥文藝口號的提出標示著反共文學的挫敗<br>
+                        陳明成：美國壓制和張道藩的失勢<br>
+                        封德屏：張道藩專心投入公務<br>
+                        陳康芬：如抒發個人在經歷大時代動亂之痛的懷鄉思憂之作，有助於國民黨「中國化」政策的各式歷史小說與演義傳奇、女性作家為主的瑣碎的家庭與生活細節的抒情描述、具有正向人性意義的「純文藝」創作……等，仍占有極高的出版比例。這顯示反共文學雖然是戰後台灣五〇年代的主流文學類型，但整體文學發展還並不限於主義政治話語的文學獨白基調。<br>
+                        鍾肇政：將日本視為一種經驗
+                    </p>
+                </div>
 
-                <section class="major-section" style="margin-bottom: 0; min-height: auto; padding: 40px;">
-                    <h2 style="font-size: 22px; margin-bottom: 15px; padding-bottom: 12px; border-bottom: 3px solid var(--accent-teal); display: flex; align-items: center; gap: 12px;">
-                        <span style="font-size: 28px; animation: sway 3s ease-in-out infinite;">✡</span>
+                <!-- 第二格: 戰鬥文藝 -->
+                <div style="padding: 30px; background: linear-gradient(135deg, rgba(168, 197, 192, 0.08), rgba(200, 184, 216, 0.08)); border-left: 6px solid var(--accent-teal); border-radius: 8px;">
+                    <h3 style="font-size: 24px; font-weight: 700; color: var(--text-dark); margin-top: 0; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 20px; animation: float 3s ease-in-out infinite reverse;">☸</span>
                         戰鬥文藝——一種沒有類型的類型
-                    </h2>
-                    <div class="major-section-content" style="padding: 0;">
-                        <p style="font-size: 17px; color: var(--text-light); line-height: 2.2; margin: 0;">
-                            戰鬥文藝——一種沒有類型的類型<br>
-                            反共文學<br>
-                            民族主義<br>
-                            健康寫實主義<br>
-                            「戰鬥」作為一種人生的精神
-                        </p>
-                    </div>
-                </section>
+                    </h3>
+                    <p style="font-size: 17px; line-height: 2.2; color: var(--text-light); margin: 0;">
+                        反共文學？<br>
+                        民族主義？<br>
+                        張俐璇：健康寫實主義＝「民生建設的實踐＋大同思想的倡議」<br>
+                        <strong style="font-size: 18px; color: var(--accent-gold);">「戰鬥」作為一種人生的精神</strong><br>
+                        虞君質：意思是不限於血反共抵俑和爭取民主自由的政治或軍事鬥爭的作品，才算是今日需要的戰鬥文藝；不，除此之外，在面對現實的戰鬥任務的前提之下，凡是表揚人性以否定共匪的發展受性的作品。朝氣蓬勃富戰鬥精神的作品，都是今日需要的戰鬥文藝。
+                    </p>
+                </div>
 
-                <section class="major-section" style="margin-bottom: 0; min-height: auto; padding: 40px;">
-                    <h2 style="font-size: 22px; margin-bottom: 15px; padding-bottom: 12px; border-bottom: 3px solid var(--accent-purple); display: flex; align-items: center; gap: 12px;">
-                        <span style="font-size: 28px; animation: float 4s ease-in-out infinite;">❊</span>
+                <!-- 第三格: 軍中作家 -->
+                <div style="padding: 30px; background: linear-gradient(135deg, rgba(200, 184, 216, 0.08), rgba(212, 175, 142, 0.08)); border-left: 6px solid var(--accent-purple); border-radius: 8px;">
+                    <h3 style="font-size: 24px; font-weight: 700; color: var(--text-dark); margin-top: 0; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 20px; animation: sway 2s ease-in-out infinite;">☸</span>
                         軍中作家不等於軍人作家不等於反共作家
-                    </h2>
-                    <div class="major-section-content" style="padding: 0;">
-                        <p style="font-size: 17px; color: var(--text-light); line-height: 2.2; margin: 0;">
-                            軍中作家不等於軍人作家不等於反共作家<br>
-                            翁伯川：《「軍中三劍客」的文學創作與活動研究》，臺南：國立成功大學中國文學系博士論文，2017
-                        </p>
-                    </div>
-                </section>
+                    </h3>
+                    <p style="font-size: 17px; line-height: 2.2; color: var(--text-light); margin: 0;">
+                        翁伯川：《「軍中三劍客」的文學創作與活動研究》<br>
+                        陳建忠：「和而不同」的書寫策略
+                    </p>
+                </div>
+
             </div>
         </section>
 
 
 
 
+        <!-- 參考文獻章節 -->
+        <section class="major-section" id="section-references" style="margin-bottom: 0; min-height: auto; padding: 40px; background: linear-gradient(135deg, rgba(212, 175, 142, 0.04), rgba(168, 197, 192, 0.04));">
+            <h2 style="font-size: 40px; font-weight: 700; color: var(--text-dark); margin-bottom: 30px; padding-bottom: 20px; border-bottom: 4px solid var(--accent-gold); letter-spacing: 2px; position: relative; display: flex; align-items: center; gap: 15px;">
+                <span style="font-size: 32px; opacity: 0.7; animation: float 3s ease-in-out infinite;">☸</span>
+                參考文獻
+                <span style="font-size: 32px; opacity: 0.7; animation: float 3s ease-in-out infinite reverse;">☸</span>
+            </h2>
+            <div class="major-section-content" style="font-size: 17px; line-height: 2.2;">
+                <p style="font-weight: 600; color: var(--accent-gold); margin-bottom: 20px;">反共文學和戰鬥文藝的衰退</p>
+                <p style="margin-bottom: 20px;">
+                    陳明成：〈反攻與反共：關鍵年代的關鍵年份--臺灣文壇「一九五六」的再考察〉，《文學與社會學術研討會：2004年青年文學會議論文集》臺南市：台灣文學館，2005。<br>
+                    封德屏：《國民黨文藝政策與實踐（1928-1981）》，臺北市：淡江大學中國文學系博士論文，2009。<br>
+                    陳康芬：《政治意識形態、文學歷史與文學敘事——臺灣五○年代反共文學研究》，花蓮縣：國立東華大學中國語文學系博士論文，2007。<br>
+                    鍾肇政：《台灣文學十講》，臺北市：前衛出版社，2000。
+                </p>
+
+                <p style="font-weight: 600; color: var(--accent-gold); margin-bottom: 20px; margin-top: 30px;">戰鬥文藝——一種沒有類型的類型</p>
+                <p style="margin-bottom: 20px;">
+                    張俐璇：《建構與流變：「寫實主義」與臺灣小說生產》，臺北市：秀威資訊科技，2016。<br>
+                    虞君質：〈建立戰鬥的批評〉，《文藝月報》第2卷第4期（1955年4月）。
+                </p>
+
+                <p style="font-weight: 600; color: var(--accent-gold); margin-bottom: 20px; margin-top: 30px;">軍中作家不等於軍人作家不等於反共作家</p>
+                <p>
+                    翁伯川：《「軍中三劍客」的文學創作與活動研究》，臺南：國立成功大學中國文學系博士論文，2017。<br>
+                    陳建忠：〈反共作家？鄉土作家？或現代主義作家？：朱西甯研究史小考〉《記憶流域：臺灣歷史書寫與記憶政治》，新北市：南十字星文化工作室有限公司，2018。
+                </p>
+            </div>
+        </section>
     </main>
 
     <!-- 頁尾 -->
@@ -1110,6 +1267,17 @@
         }
 
         // 過濾數據
+        // 漢堡菜單切換
+        function toggleMenu() {
+            const menu = document.getElementById('sidebarMenu');
+            const overlay = document.getElementById('sidebarOverlay');
+            const hamburger = document.querySelector('.hamburger-menu');
+            
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
         function filterData() {
             const author = document.getElementById('filter-author').value;
             const type = document.getElementById('filter-type').value;
