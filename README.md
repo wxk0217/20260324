@@ -47,16 +47,17 @@
         }
 
         /* 頂部導航欄 */
-        header {
-            background: linear-gradient(135deg, rgba(244, 241, 237, 0.98), rgba(212, 175, 142, 0.08));
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
+     header {
+    background: linear-gradient(135deg, rgba(244, 241, 237, 0.98), rgba(212, 175, 142, 0.08));
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    /* 加入以下這行，確保背景色永遠覆蓋全寬 */
+    width: 100vw; 
+}
         header .container {
             display: flex;
             justify-content: space-between;
@@ -789,14 +790,16 @@
             background: linear-gradient(90deg, transparent, var(--accent-gold), var(--accent-teal), transparent);
         }
 
-        footer p {
-            margin: 12px 0;
-            text-align: center;
-        }
+/* 強制表格在手機版必須在框框內滑動，不准撐開網頁 */
+.table-wrapper {
+    width: 100% !important;
+    overflow-x: auto !important;
+    display: block !important;
+}
 
-        footer div {
-            text-align: center;
-        }
+table {
+    max-width: 100%;
+}
 
         /* 響應式設計 - 平板 */
         @media (max-width: 768px) {
@@ -979,6 +982,16 @@
         * {
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
+        /* 強制表格在手機版必須在框框內滑動，不准撐開網頁 */
+.table-wrapper {
+    width: 100% !important;
+    overflow-x: auto !important;
+    display: block !important;
+}
+
+table {
+    max-width: 100%;
+}
     </style>
 </head>
 <body style="background-image: url('https://d2xsxph8kpxj0f.cloudfront.net/310519663161794951/aoyupUkZR2DscabuE8zpwF/ink-mountain-bg-green-Ttt9cd4TugRyNciqhiy27i.webp'); background-attachment: fixed; background-size: cover; background-repeat: no-repeat; background-position: center; position: relative;">
