@@ -27,6 +27,39 @@
             --text-light: #6B6B6B;
             --border-color: #E8E4E0;
         }
+        /* --- 1. 表格標題列顯眼化 (深色底白字) --- */
+        table th {
+            background-color: #5D5D5D !important; /* 深灰色，莊重且醒目 */
+            color: #FFFFFF !important;            /* 白色文字 */
+            padding: 12px 15px !important;
+            font-weight: 600;
+            text-align: center;
+            border: 1px solid #4A4A4A;
+        }
+
+        /* --- 2. 修正：身分別統計表 (縮小並置中，解決大片空白) --- */
+        /* 針對第一個出現的表格 (通常是統計表) */
+        section:nth-of-type(1) table {
+            width: auto !important;       /* 根據內容縮小寬度 */
+            min-width: 320px;            /* 避免在手機上太擠 */
+            margin: 20px auto !important; /* 核心：靠這行讓它在方格中置中 */
+            display: table;
+        }
+
+        /* --- 3. 修正：作品清單表格 (填滿區域方格) --- */
+        /* 針對第二個出現的表格 (作品清單) */
+        #worksTable, section:nth-of-type(2) table {
+            width: 100% !important;       /* 強制填滿方格 */
+            margin: 20px 0 !important;
+        }
+
+        /* --- 4. 基礎格子美化 --- */
+        table td {
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            background-color: #ffffff;
+        }
 
         body {
             font-family: 'Noto Serif TC', 'Georgia', serif;
