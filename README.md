@@ -436,26 +436,39 @@
         }
 
         table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
+            width: 100% !important; /* 強制填滿方格 */
+            border-collapse: collapse; /* 改為 collapse 讓邊框更乾淨 */
+            margin: 20px 0;
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            table-layout: auto; /* 讓欄位根據內容自動分配，避免過小 */
         }
-
         thead {
             background: linear-gradient(135deg, rgba(212, 175, 142, 0.15), rgba(168, 197, 192, 0.15));
             border-bottom: 2px solid var(--border-color);
         }
 
-        th {
-            padding: 16px;
-            text-align: left;
+  th {
+            background-color: var(--accent-gold) !important; /* 使用主題金 */
+            color: white !important; /* 白色文字 */
+            padding: 15px 12px !important;
             font-weight: 600;
-            color: var(--text-dark);
-            text-transform: uppercase;
-            font-size: 12px;
-            letter-spacing: 1.5px;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.05);
+            font-size: 16px;
+        }
+        /* 讓表格內容格線更明顯，看起來更整齊 */
+        td {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 15px;
         }
 
+        /* 斑馬紋設計：讓橫列更容易閱讀 */
+        tbody tr:nth-child(even) {
+            background-color: #FBF9F7;
+        }
         td {
             padding: 14px 16px;
             border-bottom: 1px solid var(--border-color);
