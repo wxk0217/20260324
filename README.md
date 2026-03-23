@@ -192,19 +192,19 @@
 
         .hero-decorative {
             position: absolute;
-            opacity: 0.15;
+            opacity: 0.08;
             pointer-events: none;
             font-size: 100px;
         }
 
         .hero-decorative.left {
-            top: 20px;
+            top: auto;
             left: 30px;
             animation: rotate 30s linear infinite;
         }
 
         .hero-decorative.right {
-            bottom: 20px;
+            bottom: auto;
             right: 30px;
             animation: rotate 30s linear infinite reverse;
         }
@@ -347,6 +347,17 @@
             font-size: 32px;
             opacity: 0.7;
             animation: float 3s ease-in-out infinite reverse;
+        }
+
+        /* 移除特定標題的符號 */
+        #section-stats h2::before,
+        #section-stats h2::after,
+        #section-anti-communist h2::before,
+        #section-anti-communist h2::after,
+        #section-references h2::before,
+        #section-references h2::after {
+            content: '';
+            display: none;
         }
 
         .major-section-content {
@@ -766,35 +777,147 @@
             margin: 12px 0;
         }
 
-        /* 響應式設計 */
+        /* 響應式設計 - 平板 */
         @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+
+            .container {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .hero {
+                padding: 30px 15px;
+                min-height: 250px;
+            }
+
             .hero h1 {
-                font-size: 36px;
+                font-size: 28px;
+                margin-bottom: 12px;
+            }
+
+            .hero p {
+                font-size: 13px;
             }
 
             .major-section {
-                padding: 40px 20px;
-                min-height: 400px;
+                padding: 30px 15px;
+                min-height: auto;
+                margin-bottom: 40px;
             }
 
             .major-section h2 {
-                font-size: 32px;
+                font-size: 22px;
+                margin-bottom: 15px;
             }
 
+            /* 四個分類並列改為兩列 */
+            div[style*="grid-template-columns: repeat(4"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 15px !important;
+            }
+
+            /* 表格響應 */
             table {
                 font-size: 12px;
+                width: 100% !important;
             }
 
             th, td {
-                padding: 10px 12px;
+                padding: 8px 6px !important;
+            }
+
+            .table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .filter-section {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+            }
+
+            .filter-section h2 {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+
+            .filter-row {
+                grid-template-columns: 1fr !important;
+                gap: 12px;
             }
 
             .stats-content {
                 grid-template-columns: 1fr;
+                gap: 15px;
             }
 
-            .classification-grid {
-                grid-template-columns: 1fr;
+            .stat-item {
+                padding: 15px;
+            }
+
+            /* 反共懷鄉網格改為單列 */
+            div[style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        /* 超小屏幕 */
+        @media (max-width: 480px) {
+            .container {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .hero {
+                padding: 20px 10px;
+                min-height: 200px;
+            }
+
+            .hero h1 {
+                font-size: 20px;
+                margin-bottom: 8px;
+            }
+
+            .hero p {
+                font-size: 12px;
+            }
+
+            .major-section {
+                padding: 20px 10px;
+                margin-bottom: 30px;
+            }
+
+            .major-section h2 {
+                font-size: 18px;
+            }
+
+            /* 四個分類改為單列 */
+            div[style*="grid-template-columns: repeat(4"] {
+                grid-template-columns: 1fr !important;
+            }
+
+            .filter-section {
+                padding: 15px 10px;
+            }
+
+            .filter-section h2 {
+                font-size: 14px;
+            }
+
+            table {
+                font-size: 11px;
+            }
+
+            th, td {
+                padding: 6px 4px !important;
+            }
+
+            .decorative-divider {
+                font-size: 20px;
+                margin: 30px 0;
             }
         }
 
@@ -1053,9 +1176,7 @@
         <!-- 反共懷鄉 VS 反共愛國 -->
         <section class="major-section" id="section-anticommunist" style="margin-bottom: 80px; padding: 40px; background: linear-gradient(135deg, rgba(212, 175, 142, 0.04), rgba(168, 197, 192, 0.04));">
             <h2 style="font-size: 40px; font-weight: 700; color: var(--text-dark); margin-bottom: 30px; padding-bottom: 20px; border-bottom: 4px solid var(--accent-gold); letter-spacing: 2px; position: relative; display: flex; align-items: center; gap: 15px;">
-                <span style="font-size: 32px; opacity: 0.7; animation: float 3s ease-in-out infinite;">☸</span>
                 反共懷鄉 VS 反共愛國
-                <span style="font-size: 32px; opacity: 0.7; animation: float 3s ease-in-out infinite reverse;">☸</span>
             </h2>
             <div class="major-section-content" style="font-size: 17px; line-height: 2.2;">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px;">
@@ -1141,9 +1262,7 @@
         <!-- 參考文獻章節 -->
         <section class="major-section" id="section-references" style="margin-bottom: 0; min-height: auto; padding: 40px; background: linear-gradient(135deg, rgba(212, 175, 142, 0.04), rgba(168, 197, 192, 0.04));">
             <h2 style="font-size: 40px; font-weight: 700; color: var(--text-dark); margin-bottom: 30px; padding-bottom: 20px; border-bottom: 4px solid var(--accent-gold); letter-spacing: 2px; position: relative; display: flex; align-items: center; gap: 15px;">
-                <span style="font-size: 32px; opacity: 0.7; animation: float 3s ease-in-out infinite;">☸</span>
                 參考文獻
-                <span style="font-size: 32px; opacity: 0.7; animation: float 3s ease-in-out infinite reverse;">☸</span>
             </h2>
             <div class="major-section-content" style="font-size: 17px; line-height: 2.2;">
                 <p style="font-weight: 600; color: var(--accent-gold); margin-bottom: 20px;">反共文學和戰鬥文藝的衰退</p>
