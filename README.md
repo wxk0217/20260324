@@ -60,7 +60,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            padding: 15px 20px;
+            min-height: auto;
+            flex-wrap: wrap;
         }
 
         .logo {
@@ -92,8 +94,10 @@
 
         .device-switcher {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
+            flex-wrap: nowrap;
+            overflow: hidden;
         }
 
         .device-btn {
@@ -775,6 +779,11 @@
 
         footer p {
             margin: 12px 0;
+            text-align: center;
+        }
+
+        footer div {
+            text-align: center;
         }
 
         /* 響應式設計 - 平板 */
@@ -866,9 +875,42 @@
 
         /* 超小屏幕 */
         @media (max-width: 480px) {
+            header .container {
+                padding: 12px 10px;
+            }
+
+            .logo {
+                font-size: 18px;
+                gap: 8px;
+            }
+
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+
+            .device-switcher {
+                gap: 4px;
+            }
+
+            .device-btn {
+                padding: 6px 10px;
+                font-size: 10px;
+            }
+
             .container {
                 padding-left: 10px;
                 padding-right: 10px;
+            }
+
+            footer div {
+                padding: 0 10px;
+            }
+
+            footer p {
+                font-size: 12px;
+                margin: 10px 0;
             }
 
             .hero {
