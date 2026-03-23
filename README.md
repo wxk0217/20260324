@@ -7,15 +7,15 @@
     <style>
 /* 專門解決標題被 GitHub 迴紋針符號擠開的問題 */
 .major-section h2 {
-    justify-content: center !important; /* 強制內容居中，不被左右撐開 */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: relative !important;
 }
 
 .major-section h2 a.anchor {
-    position: absolute !important; /* 將迴紋針符號抽離排版，不佔空間 */
-    left: -30px !important;       /* 把它丟到左邊視線外 */
-    opacity: 0 !important;         /* 讓它隱形 */
+    display: none !important; /* 直接消失，絕對不會擠到圖案 */
 }
-
         :root {
             --primary-bg: #F5F3F0;
             --secondary-bg: #FBF9F7;
