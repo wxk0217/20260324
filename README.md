@@ -29,15 +29,16 @@
         }
 
         body {
-            font-family: 'Noto Serif TC', 'Georgia', serif;
-            background-color: var(--primary-bg);
-            color: var(--text-dark);
-            line-height: 1.8;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(212, 175, 142, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(168, 197, 192, 0.03) 0%, transparent 50%);
-        }
+    font-family: 'Noto Serif TC', 'Georgia', serif;
+    background-color: var(--primary-bg);
+    color: var(--text-dark);
+    line-height: 1.8;
+    overflow-x: hidden;
+    position: relative; /* 加入這行 */
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(212, 175, 142, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(168, 197, 192, 0.03) 0%, transparent 50%);
+}
 
         .container {
             max-width: 1200px;
@@ -325,19 +326,27 @@
             z-index: 2;
         }
 
-        .major-section h2 {
-            font-size: 40px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 4px solid var(--accent-gold);
-            letter-spacing: 2px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+       .major-section h2 {
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 4px solid var(--accent-gold);
+    letter-spacing: 2px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 修改：讓圖案和文字一起居中 */
+    gap: 15px;
+}
+
+/* 在 h2 結束後，請立刻貼上下面這一段，專門處理迴紋針符號 */
+.major-section h2 a {
+    position: absolute !important;
+    left: -9999px !important;
+    opacity: 0 !important;
+}
 
         .major-section h2::before {
             content: '☸';
@@ -756,16 +765,19 @@
         }
 
         /* 頁尾 */
-        footer {
-            background: transparent;
-            border-top: 2px solid rgba(212, 175, 142, 0.3);
-            padding: 50px 0;
-            margin-top: 80px;
-            text-align: center;
-            color: var(--text-light);
-            font-size: 14px;
-            position: relative;
-        }
+    footer {
+    background: transparent;
+    border-top: 2px solid rgba(212, 175, 142, 0.3);
+    padding: 50px 0;
+    margin-top: 80px;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 14px;
+    position: relative;
+    display: flex;          /* 已新增 */
+    flex-direction: column; /* 已新增 */
+    align-items: center;    /* 已新增 */
+}
 
         footer::before {
             content: '';
