@@ -4,72 +4,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>《佛教小說集》數位導覽</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@400;600&display=swap" rel="stylesheet">
-/* --- 修正 1: 標題置中與圖案偏移 --- */
-.major-section h2 {
-    font-size: 40px;
-    font-weight: 700;
-    color: var(--text-dark);
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 4px solid var(--accent-gold);
-    letter-spacing: 2px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* 新增：強制內容水平居中 */
-    gap: 15px;
-    flex-wrap: wrap; /* 新增：手機版太長時自動換行 */
-}
+    <style>
+        @keyframes bg-float {
+            0%, 100% { transform: translateY(0px); opacity: 0.8; }
+            50% { transform: translateY(-20px); opacity: 0.9; }
+        }
 
-/* --- 修正 2: 頂部導航欄背景完整覆蓋 --- */
-header {
-    background: linear-gradient(135deg, rgba(244, 241, 237, 0.98), rgba(212, 175, 142, 0.08));
-    backdrop-filter: blur(10px);
-    border-bottom: 2px solid var(--border-color);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    width: 100%;
-    min-width: 100vw; /* 確保寬度至少等於視窗寬度 */
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* --- 修正 3: 頁尾文字徹底置中 --- */
-footer {
-    background: transparent;
-    border-top: 2px solid rgba(212, 175, 142, 0.3);
-    padding: 50px 0;
-    margin-top: 80px;
-    text-align: center;
-    color: var(--text-light);
-    font-size: 14px;
-    position: relative;
-    display: flex; /* 改用 Flexbox */
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
+        :root {
+            --primary-bg: #F5F3F0;
+            --secondary-bg: #FBF9F7;
+            --accent-gold: #D4AF8E;
+            --accent-teal: #A8C5C0;
+            --accent-purple: #C8B8D8;
+            --accent-rose: #E8D4C4;
+            --text-dark: #3D3D3D;
+            --text-light: #6B6B6B;
+            --border-color: #E8E4E0;
+        }
 
-footer .container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* 確保內容物在容器內也置中 */
-}
+        body {
+            font-family: 'Noto Serif TC', 'Georgia', serif;
+            background-color: var(--primary-bg);
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 142, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(168, 197, 192, 0.03) 0%, transparent 50%);
+        }
 
-footer p {
-    margin: 8px 0;
-    width: 100%;
-    text-align: center !important; /* 強制置中 */
-}
-
-/* --- 修正表格溢出（避免撐破網頁） --- */
-.table-wrapper {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    width: 100%; /* 確保不超出容器 */
-    margin-bottom: 20px;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
         /* 頂部導航欄 */
         header {
@@ -775,18 +749,12 @@ footer p {
         }
 
         /* 響應式漢堡菜單 */
-@media (max-width: 768px) {
-    /* 讓標題圖案在手機版稍微縮小，避免佔空間 */
-    .major-section h2::before, 
-    .major-section h2::after {
-        font-size: 24px;
-    }
+        @media (max-width: 768px) {
+            .device-switcher {
+                display: none;
+            }
+        }
 
-    /* 頁尾在手機版的邊距修正 */
-    footer {
-        padding: 40px 15px;
-    }
-     }
         /* 頁尾 */
         footer {
             background: transparent;
@@ -999,85 +967,6 @@ footer p {
         * {
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
-        /* --- 修正 1: 頁尾製作方說明徹底置中 --- */
-footer {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-    width: 100% !important;
-    padding: 50px 20px !important;
-}
-
-footer .container, footer div {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    width: 100% !important;
-    margin: 0 auto !important;
-}
-
-footer p {
-    text-align: center !important;
-    width: 100% !important;
-    margin: 8px 0 !important;
-    display: block !important;
-}
-
-/* --- 修正 2: 標題圖案被擠開 (處理迴紋針符號) --- */
-.major-section h2 {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important; /* 強制內容物整組置中 */
-    gap: 10px !important;
-    flex-wrap: nowrap !important; /* 防止圖案換行 */
-    position: relative;
-}
-
-/* 針對自動生成的迴紋針連結 (a 標籤) 進行處理 */
-.major-section h2 a {
-    position: absolute !important;
-    left: -25px; /* 將連結符號移出排版流，不佔空間 */
-    opacity: 0.3;
-}
-
-/* 確保法輪圖案不會被壓縮 */
-.major-section h2::before, 
-.major-section h2::after {
-    flex-shrink: 0 !important;
-    display: inline-block !important;
-}
-
-/* --- 修正 3: 手機頂欄顏色斷掉 (Header 寬度問題) --- */
-header {
-    width: 100% !important;
-    left: 0 !important;
-    right: 0 !important;
-    box-sizing: border-box !important;
-}
-
-/* 防止內部內容撐破網頁導致 Header 背景縮水 */
-html, body {
-    max-width: 100vw !important;
-    overflow-x: hidden !important;
-}
-
-/* 確保表格在手機版可以滑動，而不是把網頁撐寬 */
-.table-wrapper {
-    width: 100% !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
-    display: block !important;
-}
-
-/* 修正手機版分類方塊撐開網頁的問題 */
-@media (max-width: 768px) {
-    div[style*="display: grid; grid-template-columns: repeat(4"] {
-        grid-template-columns: 1fr !important; /* 手機版改為單行，防止擠壓 */
-        width: 100% !important;
-    }
-}
     </style>
 </head>
 <body style="background-image: url('https://d2xsxph8kpxj0f.cloudfront.net/310519663161794951/aoyupUkZR2DscabuE8zpwF/ink-mountain-bg-green-Ttt9cd4TugRyNciqhiy27i.webp'); background-attachment: fixed; background-size: cover; background-repeat: no-repeat; background-position: center; position: relative;">
