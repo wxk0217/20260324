@@ -999,6 +999,85 @@ footer p {
         * {
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
+        /* --- 修正 1: 頁尾製作方說明徹底置中 --- */
+footer {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    padding: 50px 20px !important;
+}
+
+footer .container, footer div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+}
+
+footer p {
+    text-align: center !important;
+    width: 100% !important;
+    margin: 8px 0 !important;
+    display: block !important;
+}
+
+/* --- 修正 2: 標題圖案被擠開 (處理迴紋針符號) --- */
+.major-section h2 {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important; /* 強制內容物整組置中 */
+    gap: 10px !important;
+    flex-wrap: nowrap !important; /* 防止圖案換行 */
+    position: relative;
+}
+
+/* 針對自動生成的迴紋針連結 (a 標籤) 進行處理 */
+.major-section h2 a {
+    position: absolute !important;
+    left: -25px; /* 將連結符號移出排版流，不佔空間 */
+    opacity: 0.3;
+}
+
+/* 確保法輪圖案不會被壓縮 */
+.major-section h2::before, 
+.major-section h2::after {
+    flex-shrink: 0 !important;
+    display: inline-block !important;
+}
+
+/* --- 修正 3: 手機頂欄顏色斷掉 (Header 寬度問題) --- */
+header {
+    width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* 防止內部內容撐破網頁導致 Header 背景縮水 */
+html, body {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+}
+
+/* 確保表格在手機版可以滑動，而不是把網頁撐寬 */
+.table-wrapper {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    display: block !important;
+}
+
+/* 修正手機版分類方塊撐開網頁的問題 */
+@media (max-width: 768px) {
+    div[style*="display: grid; grid-template-columns: repeat(4"] {
+        grid-template-columns: 1fr !important; /* 手機版改為單行，防止擠壓 */
+        width: 100% !important;
+    }
+}
     </style>
 </head>
 <body style="background-image: url('https://d2xsxph8kpxj0f.cloudfront.net/310519663161794951/aoyupUkZR2DscabuE8zpwF/ink-mountain-bg-green-Ttt9cd4TugRyNciqhiy27i.webp'); background-attachment: fixed; background-size: cover; background-repeat: no-repeat; background-position: center; position: relative;">
