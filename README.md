@@ -992,6 +992,60 @@ table {
 table {
     max-width: 100%;
 }
+/* --- 把這段貼在 </style> 之前 --- */
+@media (max-width: 768px) {
+    /* 1. 修正頂欄：解決顏色斷一半的問題 */
+    header {
+        width: 100% !important;
+        position: fixed !important;
+        left: 0 !important;
+        right: 0 !important;
+        margin: 0 !important;
+        background: rgba(244, 241, 237, 0.98) !important; /* 強制實色背景防止斷色 */
+    }
+
+    /* 2. 修正頁尾：解決製作方說明不置中 */
+    footer, footer .container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    footer p {
+        width: 100% !important;
+        text-align: center !important;
+        margin: 5px 0 !important;
+    }
+
+    /* 3. 修正標題：徹底隱藏造成空一格的迴紋針連結 */
+    .major-section h2 a {
+        display: none !important;
+    }
+    
+    .major-section h2 {
+        justify-content: center !important;
+        font-size: 24px !important;
+    }
+
+    /* 4. 防止內容撐破網頁 (解決背景斷色元兇) */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        position: relative !important;
+    }
+    
+    .table-wrapper {
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+/* --- 貼到這裡結束 --- */
     </style>
 </head>
 <body style="background-image: url('https://d2xsxph8kpxj0f.cloudfront.net/310519663161794951/aoyupUkZR2DscabuE8zpwF/ink-mountain-bg-green-Ttt9cd4TugRyNciqhiy27i.webp'); background-attachment: fixed; background-size: cover; background-repeat: no-repeat; background-position: center; position: relative;">
