@@ -27,7 +27,15 @@
             --text-light: #6B6B6B;
             --border-color: #E8E4E0;
         }
-
+/* 解決標題圖案被擠開的問題 */
+        .major-section h2 {
+            justify-content: center !important;
+        }
+        .major-section h2 a {
+            position: absolute !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
         body {
             font-family: 'Noto Serif TC', 'Georgia', serif;
             background-color: var(--primary-bg);
