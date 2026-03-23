@@ -5,16 +5,16 @@
     <title>《佛教小說集》數位導覽</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        @keyframes bg-float {
-            0%, 100% { transform: translateY(0px); opacity: 0.8; }
-            50% { transform: translateY(-20px); opacity: 0.9; }
-        }
+/* 專門解決標題被 GitHub 迴紋針符號擠開的問題 */
+.major-section h2 {
+    justify-content: center !important; /* 強制內容居中，不被左右撐開 */
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+.major-section h2 a.anchor {
+    position: absolute !important; /* 將迴紋針符號抽離排版，不佔空間 */
+    left: -30px !important;       /* 把它丟到左邊視線外 */
+    opacity: 0 !important;         /* 讓它隱形 */
+}
 
         :root {
             --primary-bg: #F5F3F0;
@@ -26,15 +26,6 @@
             --text-dark: #3D3D3D;
             --text-light: #6B6B6B;
             --border-color: #E8E4E0;
-        }
-        /* 解決標題圖案被擠開的問題 */
-        .major-section h2 {
-            justify-content: center !important;
-        }
-        .major-section h2 a {
-            position: absolute !important;
-            opacity: 0 !important;
-            pointer-events: none !important;
         }
 
         body {
@@ -436,52 +427,26 @@
         }
 
         table {
+            width: 100%;
             border-collapse: collapse;
-            margin: 30px auto; /* auto 讓表格在容器中水平置中 */
-            background-color: #fff;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            font-size: 14px;
         }
 
-        /* 針對統計表：不要填滿，給它一個適合的寬度 */
-        #statsTable {
-            width: auto !important;
-            min-width: 300px; /* 設定最小寬度，避免縮太小 */
-            max-width: 600px; /* 設定最大寬度，避免太散 */
+        thead {
+            background: linear-gradient(135deg, rgba(212, 175, 142, 0.15), rgba(168, 197, 192, 0.15));
+            border-bottom: 2px solid var(--border-color);
         }
 
-        /* 針對作品清單：內容多，才需要填滿 */
-        #worksTable {
-            width: 100% !important;
-        }
-
-  th {
-            background-color: #5D5D5D !important; /* 深灰色標題更有質感 */
-            color: #FFFFFF !important;
-            padding: 15px 20px !important;
+        th {
+            padding: 16px;
+            text-align: left;
             font-weight: 600;
-            text-align: center;
-            border: 1px solid #4A4A4A;
-            letter-spacing: 1px;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1.5px;
         }
 
-        td {
-            padding: 12px 15px;
-            border: 1px solid var(--border-color);
-            text-align: center;
-        }
-        /* 讓表格內容格線更明顯，看起來更整齊 */
-        td {
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            text-align: center;
-            font-size: 15px;
-        }
-
-        /* 斑馬紋設計：讓橫列更容易閱讀 */
-        tbody tr:nth-child(even) {
-            background-color: #FBF9F7;
-        }
         td {
             padding: 14px 16px;
             border-bottom: 1px solid var(--border-color);
@@ -1516,183 +1481,6 @@
     </script>
 </body>
 </html>
-
-        <!-- 參考文獻章節 -->
-        <section class="major-section" id="section-references" style="margin-bottom: 0; min-height: auto; padding: 40px; background: linear-gradient(135deg, rgba(212, 175, 142, 0.04), rgba(168, 197, 192, 0.04));">
-            <h2 style="font-size: 40px; font-weight: 700; color: var(--text-dark); margin-bottom: 30px; padding-bottom: 20px; border-bottom: 4px solid var(--accent-gold); letter-spacing: 2px; position: relative; display: flex; align-items: center; gap: 15px;">
-                參考文獻
-            </h2>
-            <div class="major-section-content" style="font-size: 17px; line-height: 2.2;">
-                <p style="font-weight: 600; color: var(--accent-gold); margin-bottom: 20px;">反共文學和戰鬥文藝的衰退</p>
-                <p style="margin-bottom: 20px;">
-                    陳明成：〈反攻與反共：關鍵年代的關鍵年份--臺灣文壇「一九五六」的再考察〉，《文學與社會學術研討會：2004年青年文學會議論文集》臺南市：台灣文學館，2005。<br>
-                    封德屏：《國民黨文藝政策與實踐（1928-1981）》，臺北市：淡江大學中國文學系博士論文，2009。<br>
-                    陳康芬：《政治意識形態、文學歷史與文學敘事——臺灣五○年代反共文學研究》，花蓮縣：國立東華大學中國語文學系博士論文，2007。<br>
-                    鍾肇政：《台灣文學十講》，臺北市：前衛出版社，2000。
-                </p>
-
-                <p style="font-weight: 600; color: var(--accent-gold); margin-bottom: 20px; margin-top: 30px;">戰鬥文藝——一種沒有類型的類型</p>
-                <p style="margin-bottom: 20px;">
-                    張俐璇：《建構與流變：「寫實主義」與臺灣小說生產》，臺北市：秀威資訊科技，2016。<br>
-                    虞君質：〈建立戰鬥的批評〉，《文藝月報》第2卷第4期（1955年4月）。
-                </p>
-
-                <p style="font-weight: 600; color: var(--accent-gold); margin-bottom: 20px; margin-top: 30px;">軍中作家不等於軍人作家不等於反共作家</p>
-                <p>
-                    翁伯川：《「軍中三劍客」的文學創作與活動研究》，臺南：國立成功大學中國文學系博士論文，2017。<br>
-                    陳建忠：〈反共作家？鄉土作家？或現代主義作家？：朱西甯研究史小考〉《記憶流域：臺灣歷史書寫與記憶政治》，新北市：南十字星文化工作室有限公司，2018。
-                </p>
-            </div>
-        </section>
-    </main>
-
-    <!-- 頁尾 -->
-    <footer>
-        <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-            <p>《佛教小說集》數位導覽 | 朱橋編著 | 佛教文化出版社，1960年11月</p>
-            <p>本網頁為學術研究用途，展示佛教小說集的內容分析與統計</p>
-            <p style="margin-top: 20px; font-size: 14px; font-weight: 600; color: var(--accent-teal);">
-                製作者：國立臺灣大學中文系博士班 吳賢愷
-            </p>
-            <p style="margin-top: 20px; font-size: 12px; opacity: 0.7;">
-                🌸 淡雅荘重的佛教美學設計 | 響應式裝置預覽 | 學術內容展示 🌸
-            </p>
-        </div>
-    </footer>
-
-    <script>
-        // 完整作品數據
-        const worksData = [
-            { author: '摩迦（星雲）', title: '不同的愛', identity: '僧', source: '未知', type: '佛教哲理和戒律' },
-            { author: '常覺', title: '一顆沉沒的摩尼珠', identity: '僧', source: '未知', type: '佛教哲理和戒律' },
-            { author: '自立', title: '回頭是岸', identity: '僧', source: '未知', type: '佛教哲理和戒律' },
-            { author: '孟瑤', title: '聲色場', identity: '普通', source: '未知', type: '佛、僧人、寺廟作為背景或敘述填充' },
-            { author: '郭嗣汾', title: '紅葉', identity: '軍', source: '未知', type: '佛、僧人、寺廟作為背景或敘述填充' },
-            { author: '周君亮', title: '荒寺之一夜', identity: '普通', source: '《暢流》19卷3期，1959年3月', type: '佛教哲理和戒律' },
-            { author: '公孫嬿', title: '普陀緣', identity: '軍', source: '未知', type: '佛、僧人、寺廟對小說情節有推進作用' },
-            { author: '楚軍', title: '雨', identity: '軍', source: '未知', type: '佛、僧人、寺廟作為背景或敘述填充' },
-            { author: '魏希文', title: '胡家父子', identity: '軍', source: '《晨光》7卷10期，1959年12月', type: '關係不明' },
-            { author: '墨人', title: '馬腳', identity: '軍', source: '未知', type: '關係不明' },
-            { author: '劉心皇', title: '幻情錄', identity: '普通', source: '未知', type: '佛、僧人、寺廟作為背景或敘述填充' },
-            { author: '西帆', title: '人間的奇蹟', identity: '軍', source: '未知', type: '佛、僧人、寺廟對小說情節有推進作用' },
-            { author: '鄧文來', title: '小蘭', identity: '軍', source: '未知', type: '佛、僧人、寺廟作為背景或敘述填充' },
-            { author: '鐘雷', title: '紅塵', identity: '軍', source: '《晨光》5卷6-8期，1957年8-10月', type: '佛、僧人、寺廟對小說情節有推進作用' },
-            { author: '繁露', title: '髮緣', identity: '普通', source: '未知', type: '佛、僧人、寺廟對小說情節有推進作用' },
-            { author: '喬霖（彭樹楷）', title: '重生', identity: '軍', source: '未知', type: '佛、僧人、寺廟對小說情節有推進作用' },
-            { author: '潘琦君', title: '悟', identity: '虔誠', source: '未知', type: '佛、僧人、寺廟作為背景或敘述填充' },
-            { author: '張慈蓮', title: '三角', identity: '僧', source: '未知', type: '佛、僧人、寺廟對小說情節有推進作用' },
-            { author: '胡國偉', title: '桃花開九月', identity: '普通', source: '未知', type: '佛、僧人、寺廟對小說情節有推進作用' },
-            { author: '絜邨', title: '須大拏太子的故事', identity: '虔誠', source: '未知', type: '佛教故事改編' },
-            { author: '杜雲之', title: '大慈悲嶺', identity: '普通', source: '未知', type: '佛教哲理和戒律' },
-            { author: '陳劍慧', title: '自殺者的悲歌', identity: '軍、虔誠', source: '未知', type: '佛教哲理和戒律' },
-            { author: '宣建人', title: '為善最樂', identity: '軍', source: '未知', type: '果報思想' },
-            { author: '志琨', title: '喜帖', identity: '普通', source: '未知', type: '佛、僧人、寺廟對小說情節有推進作用' },
-            { author: '鄭心本', title: '皈依', identity: '虔誠', source: '未知', type: '佛、僧人、寺廟對小說情節有推進作用' },
-            { author: '觀心', title: '樓上樓下', identity: '普通', source: '未知', type: '佛、僧人、寺廟作為背景或敘述填充' },
-            { author: '謝冰瑩', title: '永恆的友情', identity: '軍、虔誠', source: '未知', type: '關係不明' },
-            { author: '阮囊', title: '朝來寒雨晚來風', identity: '軍', source: '未知', type: '佛、僧人、寺廟作為背景或敘述填充' },
-            { author: '林海音', title: '母親的祕密', identity: '普通', source: '未知', type: '關係不明' },
-            { author: '曼濤', title: '布施', identity: '僧', source: '未知', type: '佛教哲理和戒律' },
-            { author: '蕭傳文', title: '白狐', identity: '普通', source: '未知', type: '佛、僧人、寺廟作為背景或敘述填充' },
-            { author: '朱橋', title: '畫像', identity: '普通', source: '未知', type: '佛、僧人、寺廟作為背景或敘述填充' }
-        ];
-
-        // 吳賢愷分類表數據
-        const wuData = [
-            { author: '摩迦（星雲）', title: '不同的愛', identity: '僧', source: '未知', type: '佛教哲理和戒律' },
-            { author: '常覺', title: '一顆沉沒的摩尼珠', identity: '僧', source: '未知', type: '佛教哲理和戒律' },
-            { author: '自立', title: '回頭是岸', identity: '僧', source: '未知', type: '佛教哲理和戒律' },
-            { author: '孟瑤', title: '聲色場', identity: '普通', source: '未知', type: '佛、僧人、寺廟作為背景或敘述填充' },
-            { author: '郭嗣汾', title: '紅葉', identity: '軍', source: '未知', type: '佛、僧人、寺廟作為背景或敘述填充' },
-            { author: '周君亮', title: '荒寺之一夜', identity: '普通', source: '《暢流》19卷3期，1959年3月', type: '佛教哲理和戒律' },
-            { author: '公孫嬿', title: '普陀緣', identity: '軍', source: '未知', type: '佛、僧人、寺廟對小說情節有推進作用' },
-            { author: '楚軍', title: '雨', identity: '軍', source: '未知', type: '佛、僧人、寺廟作為背景或敘述填充' },
-            { author: '魏希文', title: '胡家父子', identity: '軍', source: '《晨光》7卷10期，1959年12月', type: '關係不明' },
-            { author: '墨人', title: '馬腳', identity: '軍', source: '未知', type: '關係不明' }
-        ];
-
-        // 初始化表格
-        function initTable() {
-            const tbody = document.getElementById('tableBody');
-            tbody.innerHTML = '';
-            worksData.forEach(work => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${work.author}</td>
-                    <td>${work.title}</td>
-                    <td>${work.identity}</td>
-                    <td>${work.source}</td>
-                    <td>${work.type}</td>
-                `;
-                tbody.appendChild(row);
-            });
-
-            // 初始化吳賢愷表
-            const wuBody = document.getElementById('wuTableBody');
-            wuBody.innerHTML = '';
-            wuData.forEach(work => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${work.author}</td>
-                    <td>${work.title}</td>
-                    <td>${work.identity}</td>
-                    <td>${work.source}</td>
-                    <td>${work.type}</td>
-                `;
-                wuBody.appendChild(row);
-            });
-        }
-
-        // 過濾數據
-        // 漢堡菜單切換
-        function toggleMenu() {
-            const menu = document.getElementById('sidebarMenu');
-            const overlay = document.getElementById('sidebarOverlay');
-            const hamburger = document.querySelector('.hamburger-menu');
-            
-            menu.classList.toggle('active');
-            overlay.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        }
-
-        function filterData() {
-            const author = document.getElementById('filter-author').value;
-            const type = document.getElementById('filter-type').value;
-
-            const tbody = document.getElementById('tableBody');
-            tbody.innerHTML = '';
-
-            const filtered = worksData.filter(work => {
-                const authorMatch = !author || work.identity.includes(author);
-                const typeMatch = !type || work.type.includes(type);
-                return authorMatch && typeMatch;
-            });
-
-            filtered.forEach(work => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${work.author}</td>
-                    <td>${work.title}</td>
-                    <td>${work.identity}</td>
-                    <td>${work.source}</td>
-                    <td>${work.type}</td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        // 裝置切換功能
-        function switchDevice(device) {
-            document.querySelectorAll('.device-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            console.log('切換到裝置:', device);
-        }
-
-        // 頁面加載時初始化
-        document.addEventListener('DOMContentLoaded', function() {
-            initTable();
         });
     </script>
 </body>
