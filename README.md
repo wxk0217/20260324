@@ -436,26 +436,39 @@
         }
 
         table {
-            width: 100% !important; /* 強制填滿方格 */
-            border-collapse: collapse; /* 改為 collapse 讓邊框更乾淨 */
-            margin: 20px 0;
+            border-collapse: collapse;
+            margin: 30px auto; /* auto 讓表格在容器中水平置中 */
             background-color: #fff;
             border: 1px solid var(--border-color);
-            table-layout: auto; /* 讓欄位根據內容自動分配，避免過小 */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-        thead {
-            background: linear-gradient(135deg, rgba(212, 175, 142, 0.15), rgba(168, 197, 192, 0.15));
-            border-bottom: 2px solid var(--border-color);
+
+        /* 針對統計表：不要填滿，給它一個適合的寬度 */
+        #statsTable {
+            width: auto !important;
+            min-width: 300px; /* 設定最小寬度，避免縮太小 */
+            max-width: 600px; /* 設定最大寬度，避免太散 */
+        }
+
+        /* 針對作品清單：內容多，才需要填滿 */
+        #worksTable {
+            width: 100% !important;
         }
 
   th {
-            background-color: var(--accent-gold) !important; /* 使用主題金 */
-            color: white !important; /* 白色文字 */
-            padding: 15px 12px !important;
+            background-color: #5D5D5D !important; /* 深灰色標題更有質感 */
+            color: #FFFFFF !important;
+            padding: 15px 20px !important;
             font-weight: 600;
             text-align: center;
-            border: 1px solid rgba(0,0,0,0.05);
-            font-size: 16px;
+            border: 1px solid #4A4A4A;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            text-align: center;
         }
         /* 讓表格內容格線更明顯，看起來更整齊 */
         td {
