@@ -1383,7 +1383,7 @@
             { author: '觀心', title: '樓上樓下', identity: '普通', source: '未知', type: '佛、僧人、寺廟作為背景或敘述填充' },
             { author: '謝冰瑩', title: '永恆的友情', identity: '軍、虔誠', source: '未知', type: '關係不明' },
             { author: '阮囊', title: '朝來寒雨晚來風', identity: '軍', source: '未知', type: '佛、僧人、寺廟作為背景或敘述填充' },
-            { author: '林海音', title: '母親的祕密', identity: '普通', source: '未知', type: '關係不明' },
+            { author: '林海音', title: '母親的祕密', identity: '普通', source: '聯合報1954年11月12日', type: '關係不明' },
             { author: '曼濤', title: '布施', identity: '僧', source: '未知', type: '佛教哲理和戒律' },
             { author: '蕭傳文', title: '白狐', identity: '普通', source: '未知', type: '佛、僧人、寺廟作為背景或敘述填充' },
             { author: '朱橋', title: '畫像', identity: '普通', source: '未知', type: '佛、僧人、寺廟作為背景或敘述填充' }
